@@ -24,6 +24,7 @@ class DArrey {
         this.#arr = tmp;
 
     }
+
     push_back(elem) {
         if (this.#size === this.#capacity) {
             this.resize(this.#capacity * this.#CapExponent);
@@ -39,9 +40,9 @@ class DArrey {
     }
 
     erase(pos) {
-        // if(pos < 0 || pos >= this.#size) {
-        //     throw new Error('!Out of range');
-        // }
+        if(pos < 0 || pos >= this.#size) {
+            throw new Error('!Out of range');
+        }
         // const tmp = new Uint32Array(this.#capacity);
         // for (let i = 0; i < this.#size; ++i){
         //     if( i !== pos) {
@@ -51,18 +52,14 @@ class DArrey {
         // this.#arr = tmp;
         // this.#size--;
 
-        for (let i = pos; i < this.#size; ++i) {
+        for (let i = pos; i < this.#size - 1; ++i) {
             this.#arr[i] = this.#arr[i + 1];
         }
         this.#size--;
     }
 
     empty() {
-        if (this.#size === 0) {
-            return true
-        } else {
-            return false;
-        }
+        return this.#size === 0;
     }
 
     reserve(n) {
@@ -105,7 +102,7 @@ class DArrey {
 
     popBack() {
         if (this.#size === 0) {
-            throw new Error('Out of renge');
+            throw new Error('Array os empty');
         }
         let elm = this.#arr[this.#size - 1];
         this.#size--;
@@ -117,9 +114,9 @@ class DArrey {
             throw new Error('Out of range');
 
         } else if (this.#size === this.#capacity) {
-            this.reserve(this.#capacity * 2);
+            this.reserve(this.#capacity * this.#CapExponent);
         }
-
+        
         for (let i = this.#size; i > index; --i) {
             this.#arr[i] = this.#arr[i - 1];
         }
@@ -128,9 +125,12 @@ class DArrey {
     }
 
     swap(arr,i, j) {
-        let tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+        if(i < 0 || i > this.#size || j < 0 || j > this.#size) {
+            throw new Error("Out of range");
+        }
+        let tmp = this.#arr[i];
+        this.#arr[i] = this.#arr[j];
+        this.#arr[j] = tmp;
     }
 
     values() {
