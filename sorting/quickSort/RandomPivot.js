@@ -1,46 +1,43 @@
 const swap = (arr, i, j) => {
-    let tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
+    [arr[i], arr[j]] = [arr[j], arr[i]];
 };
 
-function randomPivot(low, high) {
-    return low + Math.floor((Math.random() * (high - low)));
-}
+const randomPivot = (lowe, right) => {
+    return lowe + Math.floor((Math.random() * (right - lowe + 1)));
+};
 
-const partition = (arr, low, high) => {
-    const pivotIndex = randomPivot(low, high);
-    swap(arr, low, pivotIndex);
-    const pivot = arr[low];
+const partition = (arr, lowe, right) => {
+    const pivotIndex = randomPivot(lowe, right);
+    swap(arr, lowe, pivotIndex);
+    const pivot = arr[lowe];
 
-    let i = low;
-    let j = high;
+    let i = lowe + 1;
+    let j = right;
 
-    while (i < j) {
-        do {
+    while (true) {
+        while (i <= right && arr[i] <= pivot) {
             i++
-        } while (i < high && arr[i] <= pivot);
-
-        do {
-            j--
-        } while (j > low && arr[j] > pivot);
+        }
+        while (j >= lowe && arr[j] > pivot) {
+            j--;
+        }
         if (i >= j) {
             break;
         }
-        swap(arr, i, j);
+        swap(arr, j, i);
     }
-    swap(arr, low, j);
-    return j;
+    swap(arr, lowe, j);
+    return j
 };
 
-const quickSort = (arr, low, high) => {
-    if (low < high) {
-        const p = partition(arr, low, high);
-        quickSort(arr, low, p);
-        quickSort(arr, p + 1, high);
+const quickSort = (arr, lowe, right) => {
+    if (lowe < right) {
+        const p = partition(arr, lowe, right);
+        quickSort(arr, lowe, p - 1);
+        quickSort(arr, p + 1, right);
     }
 };
 
 let arr = [10, 80, 30, 90, 40, 50, 70];
-randomPivot(arr, 0, arr.length);
-console.log("random", randomPivot(0, arr.length));
+quickSort(arr, 0, arr.length - 1);
+console.log("Sorted", arr);
