@@ -1,0 +1,16 @@
+{
+  "name": "data-structures-project",
+  "version": "1.0.0",
+  "description": "Algorithms and Data Structures implemented in JavaScript.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "data-structures",
+    "algorithms"
+  ],
+  "author": "",
+  "license": "ISC"
+}
