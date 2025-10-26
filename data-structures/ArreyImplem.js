@@ -1,4 +1,4 @@
-class DArrey {
+class DArray {
     #size = 0;
     #capacity = 0;
     #arr = null;
@@ -9,7 +9,7 @@ class DArrey {
         this.#arr = new Uint32Array(cap);
     }
     resize(new_cap, fill = 0) {
-        const tmp = new Uint32Array(new_cap,);
+        const tmp = new Uint32Array(new_cap);
 
         for (let i = 0; i < this.#size; ++i) {
             tmp[i] = this.#arr[i];

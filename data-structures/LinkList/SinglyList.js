@@ -118,11 +118,11 @@ class SinglyList {
             throw new Error("Out of range");
         }
         if (index === this.length) {
-            this.pop_back(value);
+            this.push_back(value);
             return;
         }
         if (index === 0) {
-            this.pop_front(value);
+            this.push_front(value);
             return;
         }
         let prev = this.head;
@@ -140,10 +140,10 @@ class SinglyList {
             throw new Error("Out of range");
         }
         if (index === 0) {
-            return this.pop_front;
+            return this.pop_front();
         }
-        if (index = this.length - 1) {
-            return this.pop_back;
+        if (index === this.length - 1) {
+            return this.pop_back();
         }
         let prev = this.head;
         for (let i = 0; i < index - 1; ++i) {
@@ -159,7 +159,7 @@ class SinglyList {
             throw new Error("No Element");
         }
         if (this.head.data === value) {
-            return this.pop_front;
+            return this.pop_front();
         }
         let current = this.head.next;
         let prev = this.head;
