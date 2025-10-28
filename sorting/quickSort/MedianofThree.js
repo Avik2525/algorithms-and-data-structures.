@@ -1,56 +1,51 @@
-function medianOfThree(arr, low, high) {
-    const mid = Math.floor((low + high) / 2);
-    const a = arr[low];
-    const b = arr[mid];
-    const c = arr[high];
+const medianOfThree = (arr, lowe, right) => {
+    let mid = Math.floor((lowe + right) / 2);
+    let a = arr[lowe];
+    let b = arr[mid];
+    let c = arr[right];
 
-    if ((a > b) !== (a > c)) return low;
+    if ((a > b) !== (a > c)) return lowe;
     if ((b > a) !== (b > c)) return mid;
-    return high;
-}
-
-const swap = (arr, i, j) => {
-    let tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
+    return right;
 };
 
-const partition = (arr, low, high) => {
-    const median = medianOfThree(arr, low, high);
-    swap(arr, low, median);
-    const pivot = arr[low];
+const swap = (arr, i, j) => {
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+};
 
-    let i = low;
-    let j = high;
+const partition = (arr, lowe, right) => {
+    const median = medianOfThree(arr, lowe, right);
+    swap(arr, lowe, median);
+    let pivot = arr[lowe];
 
-    while (i < j) {
+    let i = lowe;
+    let j = right + 1;
+
+    while (true) {
         do {
-            i++
-        } while (i < high && arr[i] <= pivot);
+            i++;
+        } while (i <= right && arr[i] < pivot);
 
         do {
-            j--
-        } while (j > low && arr[j] > pivot);
-        if (i >= j) {
-            break;
-        }
+            j--;
+        } while(arr[j] > pivot);
+        
+        if(i >= j) break;
         swap(arr, i, j);
     }
-    swap(arr, low, j);
+    swap(arr, lowe, j);
     return j;
 };
 
-const quickSort = (arr, low, high) => {
-    if (low < high) {
-        const p = partition(arr, low, high);
-        quickSort(arr, low, p);
-        quickSort(arr, p + 1, high);
+const quickSort = (arr, lowe, right) => {
+    if(lowe < right) {
+        let p = partition(arr, lowe, right);
+        quickSort(arr, lowe, p - 1);
+        quickSort(arr, p + 1, right);
     }
 };
 
-const arr = [3, 6, 2, 8, 1, 5];
-
-const medianIndex = medianOfThree(arr, 0, arr.length - 1);
-
-console.log("median", medianIndex);
+const arr = [3, 6, 2, 8, 1, 5, 4, 7];
+quickSort(arr, 0, arr.length - 1);
+console.log(arr);
 
