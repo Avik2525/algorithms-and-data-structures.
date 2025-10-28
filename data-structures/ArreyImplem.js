@@ -40,7 +40,7 @@ class DArray {
     }
 
     erase(pos) {
-        if(pos < 0 || pos >= this.#size) {
+        if (pos < 0 || pos >= this.#size) {
             throw new Error('!Out of range');
         }
         // const tmp = new Uint32Array(this.#capacity);
@@ -116,7 +116,7 @@ class DArray {
         } else if (this.#size === this.#capacity) {
             this.reserve(this.#capacity * this.#CapExponent);
         }
-        
+
         for (let i = this.#size; i > index; --i) {
             this.#arr[i] = this.#arr[i - 1];
         }
@@ -124,8 +124,8 @@ class DArray {
         this.#size++;
     }
 
-    swap(arr,i, j) {
-        if(i < 0 || i > this.#size || j < 0 || j > this.#size) {
+    swap(arr, i, j) {
+        if (i < 0 || i > this.#size || j < 0 || j > this.#size) {
             throw new Error("Out of range");
         }
         let tmp = this.#arr[i];
@@ -149,7 +149,7 @@ class DArray {
 
     entris() {
         for (let i = 0; i < this.#size; ++i) {
-            yield[i,this.#arr[i]];
+            yield[i, this.#arr[i]];
         }
     }
 
@@ -170,7 +170,7 @@ class DArray {
     filter(callback) {
         let result = [];
         for (let i = 0; i < this.#size; ++i) {
-            if(callback(this.#arr[i], i, this)) {
+            if (callback(this.#arr[i], i, this)) {
                 result.push(this.#arr[i]);
             }
         }
@@ -187,7 +187,7 @@ class DArray {
 
     Some(callback) {
         for (let i = 0; i < this.#size; ++i) {
-            if(callback(this.#arr[i], i, this)) {
+            if (callback(this.#arr[i], i, this)) {
                 return true;
             }
         }
@@ -196,7 +196,7 @@ class DArray {
 
     Every(callback) {
         for (let i = 0; i < this.#size; ++i) {
-            if(!callback(this.#arr[i], i, this)) {
+            if (!callback(this.#arr[i], i, this)) {
                 return false;
             }
         }
@@ -205,7 +205,7 @@ class DArray {
 
     Find(callback) {
         for (let i = 0; i < this.#size; ++i) {
-            if(callback(this.#arr[i], this, i)){
+            if (callback(this.#arr[i], this, i)) {
                 return this.#arr[i];
             }
         }
@@ -214,7 +214,7 @@ class DArray {
 
     FindIndex(callback) {
         for (let i = 0; i < this.#size; ++i) {
-            if(callback(this.#arr[i], i, this)) {
+            if (callback(this.#arr[i], i, this)) {
                 return i
             }
         }
@@ -223,30 +223,28 @@ class DArray {
 
     Includes(value) {
         for (let i = 0; i < this.#size; ++i) {
-            if(this.#arr[i] === value) {
+            if (this.#arr[i] === value) {
                 return true;
             }
-        } 
+        }
         return false;
     }
-    
+
     [Symbol.iterator]() {
         const collection = this.#arr;
-        let calculated_length = this.#size;
-        let indxe = 0;
+        const length = this.#size;
+        let index = 0;
+
         return {
             next() {
-                if (indxe < calculated_length) {
-                    return {
-                        value: collection[indxe++],
-                        done: false
-                    };
+                if (index < length) {
+                    return { value: collection[index++], done: false };
                 }
-
-                return { value: undefined, done: true }
-            }
-        }
-    };
+                return { value: undefined, done: true };
+            },
+            [Symbol.iterator]() { return this; }
+        };
+    }
 }
 
 
