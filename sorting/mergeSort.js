@@ -1,30 +1,30 @@
 // Function to perform Merge Sort on an array, taking low and high indices
-function mergeSort(arr, low, high) {
+function mergeSort(arr, lowe, right) {
     // Base case: If low >= high, the subarray has 1 or 0 elements, so return
-    if (low >= high) return;
+    if (lowe >= right) return;
 
     // Calculate the middle index of the current subarray
-    let mid = Math.floor((low + high) / 2);
+    let mid = Math.floor((lowe + right) / 2);
 
     // Recursively sort the left half of the subarray (from low to mid)
-    mergeSort(arr, low, mid);
+    mergeSort(arr, lowe, mid);
     // Recursively sort the right half of the subarray (from mid+1 to high)
-    mergeSort(arr, mid + 1, high);
+    mergeSort(arr, mid + 1, right);
     // Merge the two sorted halves back into the original array
-    merge(arr, low, mid, high);
+    merge(arr, lowe, mid, right);
 }
 
 // Function to merge two sorted subarrays into a single sorted array
-function merge(arr, low, mid, high) {
+function merge(arr, lowe, mid, right) {
     // Create a left subarray (from index low to mid)
-    let a1 = arr.slice(low, mid + 1);
+    let a1 = arr.slice(lowe, mid + 1);
     // Create a right subarray (from index mid+1 to high)
-    let a2 = arr.slice(mid + 1, high + 1);
+    let a2 = arr.slice(mid + 1, right + 1);
 
     // Initialize pointers: i for left subarray, j for right subarray, k for main array
     let i = 0;
     let j = 0;
-    let k = low;
+    let k = lowe;
 
     // Compare elements from both subarrays and merge them in sorted order
     while (i < a1.length && j < a2.length) {

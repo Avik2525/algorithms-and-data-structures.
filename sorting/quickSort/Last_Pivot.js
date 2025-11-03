@@ -4,43 +4,43 @@ const swap = (arr, i, j) => {
     arr[j] = tmp;
 };
 
-const SortLast = (arr, low, high) => {
-    if(low < high) {
-        const p = partition(arr, low, high);
-        quickSort(arr, low, p);
-        quickSort(arr, p + 1, high);
+const SortLast = (arr, lowe, right) => {
+    if(lowe < right) {
+        const p = partition(arr, lowe, right);
+        quickSort(arr, lowe, p);
+        quickSort(arr, p + 1, right);
     }
 }
 
-const partition = (arr, low, high) => {
-    swap(arr, low, high - 1);
-    const pivot = arr[low];
+const partition = (arr, lowe, right) => {
+    swap(arr, lowe, right - 1);
+    const pivot = arr[lowe];
 
-    let i = low;
-    let j = high;
+    let i = lowe;
+    let j = right;
 
     while (i < j) {
         do {
             i++
-        } while (i < high && arr[i] <= pivot);
+        } while (i < right && arr[i] <= pivot);
 
         do {
             j--
-        } while (j > low && arr[j] > pivot);
+        } while (j > lowe && arr[j] > pivot);
         if (i >= j) {
             break;
         }
         swap(arr, i, j);
     }
-    swap(arr, low, j);
+    swap(arr, lowe, j);
     return j;
 };
 
-const quickSort = (arr, low, high) => {
-    if (low < high) {
-        const p = partition(arr, low, high);
-        quickSort(arr, low, p);
-        quickSort(arr, p + 1, high);
+const quickSort = (arr, lowe, right) => {
+    if (lowe < right) {
+        const p = partition(arr, lowe, right);
+        quickSort(arr, lowe, p);
+        quickSort(arr, p + 1, right);
     }
 };
 

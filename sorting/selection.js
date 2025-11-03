@@ -1,5 +1,5 @@
 // Function to sort an array using the Selection Sort algorithm
-function foo(arr) {
+function selection(arr) {
     // Store the length of the input array in 'size'
     let size = arr.length;
 

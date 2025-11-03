@@ -1,6 +1,6 @@
 // Defines a function 'foo' that takes an array 'arr' as input.
 // This function sorts the array using the Insertion Sort algorithm.
-function foo(arr){
+function insertionSort(arr){
     // Stores the total number of elements in the array in the variable 'n'.
     let n = arr.length;
 
