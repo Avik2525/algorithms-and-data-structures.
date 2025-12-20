@@ -271,7 +271,3 @@ class SinglyList {
         }
     }
 };
-
-
-
-console.log("Hello");
